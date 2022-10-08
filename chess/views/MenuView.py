@@ -9,7 +9,7 @@ class MenuView:
         menu_choice = 1
         while int(menu_choice) != 0:
         #Menu selection
-            menu_choice = int(input("Player menu\n 0 - Exit\n 1 - Search a player\n 2 - Search all players\n 3 - Add new player\n Choice : "))
+            menu_choice = int(input("---------------- Player menu ----------------\n 0 - Exit\n 1 - Search a player\n 2 - Search all players\n 3 - Add new player\n Choice : "))
 
             if int(menu_choice) == 1:
                 name_choice = input("Enter player lastname: ")
