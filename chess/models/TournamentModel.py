@@ -27,33 +27,38 @@ class TournamentModel:
     @staticmethod
     def get_one(ids):
         one_tournament = Query()
-        result_one = TournamentDb.search(one_tournament.tournament_ids == ids)
+        result_one = Data.search(one_tournament.tournament_ids == ids)
         return result_one
 
     @staticmethod
     def get_all():
-        result_all = TournamentDb.all()
+        result_all = Data.all()
         return result_all
 
     #add a tournament
     def add_one(self):
         new_tournament = {"tournament_ids": self.tournament_ids, "name": self.name, "date": self.date, "count_round": self.count_round, "location": self.location, "players_ids": self.players_ids, "round": self.round, "time_control": self.time_control, "description": self.description}
-        TournamentDb.insert(new_tournament)
-
-    #data set
-    def add_data_set(self):
-        TournamentDb.insert_multiple(self)
+        Data.insert(new_tournament)
 
     #Data set for a tournement
     @staticmethod
     def init_db():
         init_tournament = [
-                {"tournament_ids": 1,"name": "Tournois du Botswana", "date": "13/10/2022", "count_round": 4, "location": "Gaborone", "round": 1, "players_ids": '1-5;2-6;3-7;4-8', "time_control":'bullets', "description": 'Tournoi suisse pour les eleves de Westwood IS'},
-                {"tournament_ids": 1,"name": "Tournois du Botswana", "date": "13/10/2022", "count_round": 4, "location": "Gaborone", "round": 2, "players_ids": '1-4;2-5;3-6;7-8', "time_control":'bullets', "description": 'Tournoi suisse pour les eleves de Westwood IS'},
-                {"tournament_ids": 1,"name": "Tournois du Botswana", "date": "13/10/2022", "count_round": 4, "location": "Gaborone", "round": 3, "players_ids": '1-3;2-4;5-7;6-8', "time_control":'bullets', "description": 'Tournoi suisse pour les eleves de Westwood IS'},
-                {"tournament_ids": 1,"name": "Tournois du Botswana", "date": "13/10/2022", "count_round": 4, "location": "Gaborone", "round": 4, "players_ids": '1-6;3-2;4-3;5-8', "time_control":'bullets', "description": 'Tournoi suisse pour les eleves de Westwood IS'},
+                {"tournament_ids": 1,"name": "Tournois du Botswana", "date": "13/10/2022", "count_round": 3, "location": "Gaborone", "round": 1, "players_ids": '1;2;3;4', "time_control":'bullets', "description": 'Tournoi suisse pour les eleves de Westwood IS'},
+                {"tournament_ids": 2,"name": "Tournois de Toulouse", "date": "14/10/2022", "count_round": 3, "location": "Toulouse", "round": 1, "players_ids": '1;2;3;4', "time_control":'rapid', "description": 'Tournoi suisse'},
             ]
-        TournamentModel.add_data_set(init_tournament)
+        Data.insert_multiple(init_tournament)
+
+        init_player = [
+                {"id": 1,"firstname": "Caroline", "lastname": "TATA", "birthdate": "01/12/1970", "gender": "M", "ranking": 1200, "tournament_ids": 1},
+                {"id": 2,"firstname": "Xavier", "lastname": "TITI", "birthdate": "02/11/1975", "gender": "F", "ranking": 1210, "tournament_ids": 1},
+                {"id": 3,"firstname": "Victor", "lastname": "TOTO", "birthdate": "03/10/1980", "gender": "M", "ranking": 1220, "tournament_ids": 1},
+                {"id": 4,"firstname": "Gaspart", "lastname": "TUTU", "birthdate": "04/09/1985", "gender": "F", "ranking": 1230, "tournament_ids": 1},
+                ]
+        player_table.insert_multiple(init_player)
 
 #création db fichier .json
-TournamentDb = TinyDB('db/TournamentDb.json')
+Data = TinyDB('db/Data.json')
+player_table = Data.table('player')
+round_table = Data.table('round')
+match_table = Data.table('match')

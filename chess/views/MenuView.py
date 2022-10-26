@@ -21,12 +21,14 @@ class MenuView:
                     
                     if int(menu_choice_t) == 1:
                         MenuView.add_tournament()
+                        TournamentController
                     
                     elif int(menu_choice_t) == 2:
                         continue_choice = int(input("\nEnter the tournament's ID: "))
+                        
 
                     elif int(menu_choice_t) == 3:
-                        consult_choice = input("\nEnter the tournament's ID: ")
+                        consult_choice = int(input("\nEnter the tournament's ID: "))
                         TournamentController.search_one(consult_choice)
 
                     elif int(menu_choice_t) == 4:
@@ -50,25 +52,26 @@ class MenuView:
                         MenuView.add_player()
 
     def add_player() -> None:
-        new_player_id = 0
-        new_player_firstname = input("Firstname :  ")
-        new_player_lastname = input("Lastname :  ")
-        new_player_birthdate = input("Birthdate (dd/mm/yyyy):  ")
-        new_player_gender = input("Gender (M or F) :  ")
-        new_player_ranking = int(input("Ranking :  "))
-        new_player_tournament_ids = 0
-        new_player = PlayerModel(new_player_id, new_player_firstname, new_player_lastname, new_player_birthdate, new_player_gender, new_player_ranking, new_player_tournament_ids)
+        id = 0
+        firstname = input("Firstname :  ")
+        lastname = input("Lastname :  ")
+        birthdate = input("Birthdate (dd/mm/yyyy):  ")
+        gender = input("Gender (M or F) :  ")
+        ranking = int(input("Ranking :  "))
+        tournament_ids = 0
+        new_player = PlayerModel(id, firstname, lastname, birthdate, gender, ranking, tournament_ids)
         PlayerController.add_one(new_player)
 
     def add_tournament() -> None:
-        tournament_ids = input("IDS: ")
+        tournament_ids = int(input("IDS: "))
         name = input("Tournament Name: ")
         date = input("Tournament date (dd/mm/yyyy): ")
         number_round = input("Number of round: ")
         location = input("Location: ")
-        round = "0"
-        player_ids = '1-5;2-6;3-7;4-8'
-        time_control = input("Time control (Bullets, blitz or rapid): ")
+        round = 0
+        player_ids = '1;2;3;4'
+        time_control = input("Time control (Bullets, Blitz or Rapid): ")
         description = input("Enter a tournament description: ")
         new_tournament = TournamentModel(tournament_ids, name, date, number_round, location, round, player_ids, time_control, description)
-        TournamentModel.add_one(new_tournament)
+        TournamentController.add_one(new_tournament)
+        TournamentController.generate_round(tournament_ids)
