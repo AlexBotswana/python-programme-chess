@@ -18,4 +18,9 @@ class PlayerController:
     @staticmethod
     def add_one(infos_player) -> None:
         PlayerModel.add_one(infos_player)
+
+    @staticmethod
+    def add_id_player() -> None:
+        id = PlayerModel.add_id()
+        return id
         

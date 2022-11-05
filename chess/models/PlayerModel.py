@@ -1,5 +1,6 @@
 from tinydb import Query
 from models.TournamentModel import player_table
+import operator
 
 
 class PlayerModel:
@@ -33,6 +34,22 @@ class PlayerModel:
     def get_all():
         result_all = player_table.all()
         return result_all
+    
+    @staticmethod
+    def add_id():
+        id_player = int(player_table.count(id)) + 1
+        return id_player
+
+    #player list order by ranking
+    @staticmethod
+    def sort_ranking() -> list:
+        order_ranking = []
+        order_ranking = player_table.all()
+        order_ranking.sort(key=operator.itemgetter("ranking"))
+        return order_ranking
+
+    
+
 
     
 

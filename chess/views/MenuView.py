@@ -2,6 +2,7 @@ from controllers.TournamentController import TournamentController
 from models.PlayerModel import PlayerModel
 from models.TournamentModel import TournamentModel
 from controllers.PlayerController import PlayerController
+from controllers.RoundController import RoundController
 
 class MenuView:
     def __init__(self) -> None:
@@ -17,21 +18,28 @@ class MenuView:
                 menu_choice_t = 1
                 #Menu selection
                 while int(menu_choice_t) != 0:
-                    menu_choice_t = int(input("\n\n---------------- Tournaments menu ----------------\n 0 - Exit\n 1 - Start a new tournament\n 2 - Continue a tournament\n 3 - Consult a tournament\n 4 - Generate report\n Choice : "))
+                    menu_choice_t = int(input("\n\n---------------- Tournaments menu ----------------\n 0 - Exit\n 1 - Create a new tournament\n 2 - Start a tournament\n 3 - Continue a tournament\n 4 - Consult a tournament\n 5 - Generate report\n Choice : "))
                     
                     if int(menu_choice_t) == 1:
                         MenuView.add_tournament()
-                        TournamentController
-                    
+                                            
                     elif int(menu_choice_t) == 2:
-                        continue_choice = int(input("\nEnter the tournament's ID: "))
-                        
+                        data_validation = int(input("\nEnter the tournament's ID: "))
+                        #Show all tournament data for validation before starting
+                        TournamentController.search_one(data_validation)
+                        start_choice = int(input("\n Do you confirm to start this tournament?\n 1 - YES\n 2 - NO\n"))
+                        if start_choice == 1:
+                            RoundController.generate_round(data_validation)                     
 
                     elif int(menu_choice_t) == 3:
                         consult_choice = int(input("\nEnter the tournament's ID: "))
                         TournamentController.search_one(consult_choice)
-
+                        
                     elif int(menu_choice_t) == 4:
+                        consult_choice = int(input("\nEnter the tournament's ID: "))
+                        TournamentController.search_one(consult_choice)
+
+                    elif int(menu_choice_t) == 5:
                         TournamentController.show_all()
 
             elif int(menu_choice) == 2:
@@ -52,7 +60,7 @@ class MenuView:
                         MenuView.add_player()
 
     def add_player() -> None:
-        id = 0
+        id = PlayerController.add_id_player()
         firstname = input("Firstname :  ")
         lastname = input("Lastname :  ")
         birthdate = input("Birthdate (dd/mm/yyyy):  ")
@@ -69,9 +77,9 @@ class MenuView:
         number_round = input("Number of round: ")
         location = input("Location: ")
         round = 0
-        player_ids = '1;2;3;4'
+        player_ids = input("Enter players' ID (with ; as separator): ")
         time_control = input("Time control (Bullets, Blitz or Rapid): ")
         description = input("Enter a tournament description: ")
         new_tournament = TournamentModel(tournament_ids, name, date, number_round, location, round, player_ids, time_control, description)
         TournamentController.add_one(new_tournament)
-        TournamentController.generate_round(tournament_ids)
+        
