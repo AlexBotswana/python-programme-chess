@@ -25,24 +25,24 @@ class TournamentModel:
         self.description = description
     
     @staticmethod
-    def get_one(ids):
+    def get_one(id:int) -> None:
         one_tournament = Query()
-        result_one = Data.search(one_tournament.tournament_ids == ids)
+        result_one = Data.search(one_tournament.tournament_ids == id)
         return result_one
 
     @staticmethod
-    def get_all():
+    def get_all() -> None:
         result_all = Data.all()
         return result_all
 
     #add a tournament
-    def add_one(self):
+    def add_one(self) -> None:
         new_tournament = {"tournament_ids": self.tournament_ids, "name": self.name, "date": self.date, "count_round": self.count_round, "location": self.location, "players_ids": self.players_ids, "round": self.round, "time_control": self.time_control, "description": self.description}
         Data.insert(new_tournament)
 
     #Data set for a tournement
     @staticmethod
-    def init_db():
+    def init_db() -> None:
         init_tournament = [
                 {"tournament_ids": 1,"name": "Tournois du Botswana", "date": "13/10/2022", "count_round": 3, "location": "Gaborone", "round": 1, "players_ids": '1;2;3;4', "time_control":'bullets', "description": 'Tournoi suisse pour les eleves de Westwood IS'},
                 {"tournament_ids": 2,"name": "Tournois de Toulouse", "date": "14/10/2022", "count_round": 3, "location": "Toulouse", "round": 1, "players_ids": '1;2;3;4', "time_control":'rapid', "description": 'Tournoi suisse'},

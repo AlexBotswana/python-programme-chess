@@ -3,6 +3,7 @@ from models.PlayerModel import PlayerModel
 from models.TournamentModel import TournamentModel
 from controllers.PlayerController import PlayerController
 from controllers.RoundController import RoundController
+from controllers.MatchController import MatchController
 
 class MenuView:
     def __init__(self) -> None:
@@ -24,12 +25,12 @@ class MenuView:
                         MenuView.add_tournament()
                                             
                     elif int(menu_choice_t) == 2:
-                        data_validation = int(input("\nEnter the tournament's ID: "))
-                        #Show all tournament data for validation before starting
-                        TournamentController.search_one(data_validation)
-                        start_choice = int(input("\n Do you confirm to start this tournament?\n 1 - YES\n 2 - NO\n"))
-                        if start_choice == 1:
-                            RoundController.generate_round(data_validation)                     
+                        tournament_id = int(input("\nEnter the tournament's ID: "))
+                        #test if already started (round1 existing)
+                        
+                        RoundController.generate_round(tournament_id)
+                        MatchController.show_match(tournament_id, 'Round1')
+
 
                     elif int(menu_choice_t) == 3:
                         consult_choice = int(input("\nEnter the tournament's ID: "))

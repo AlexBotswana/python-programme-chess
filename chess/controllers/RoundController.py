@@ -12,6 +12,6 @@ class RoundController:
         name = 'Round1'
         begin_time = 0
         end_time = 0
-        match_list = MatchController.round1_match()
+        match_list = MatchController.round1_match(tournament_id)
         new_round = RoundModel(round_id, name, begin_time , end_time, match_list, tournament_id)
         RoundModel.add_one(new_round)

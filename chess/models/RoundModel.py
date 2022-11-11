@@ -1,4 +1,5 @@
 from models.TournamentModel import round_table
+from tinydb import Query
 
 
 class RoundModel:
@@ -15,7 +16,7 @@ class RoundModel:
         self.match_list = match_list
         self.tournament_id = tournament_id
 
-#add a round
+    #add a round
     def add_one(self):
         new_round = {"step": self.name, "begin_time": self.begin_time, "end_time": self.end_time, "match_list": self.match_list, "tournament_id": self.tournament_id}
         round_table.insert(new_round)
@@ -24,3 +25,5 @@ class RoundModel:
     def add_id():
         id_round = int(round_table.count(id)) + 1
         return id_round
+
+    

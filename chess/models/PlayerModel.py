@@ -20,32 +20,32 @@ class PlayerModel:
         self.ranking = ranking
         self.tournament_ids = tournament_ids
     
-    def add_one(self):
+    def add_one(self) -> None:
         new_player = {"id": self.id, "firstname": self.firstname, "lastname": self.lastname, "birthdate": self.birthdate, "gender": self.gender, "ranking": self.ranking, "tournament_ids": self.tournament_ids}
         player_table.insert(new_player)
     
     @staticmethod
-    def get_one(player_lastname):
+    def get_one(player_lastname:str) -> None:
         oneplayer = Query()
         result_one = player_table.search(oneplayer.lastname == player_lastname)
         return result_one
 
     @staticmethod
-    def get_all():
+    def get_all() -> None:
         result_all = player_table.all()
         return result_all
     
     @staticmethod
-    def add_id():
+    def add_id() -> None:
         id_player = int(player_table.count(id)) + 1
         return id_player
 
-    #player list order by ranking
+    #players list order by reverse ranking
     @staticmethod
     def sort_ranking() -> list:
         order_ranking = []
         order_ranking = player_table.all()
-        order_ranking.sort(key=operator.itemgetter("ranking"))
+        order_ranking.sort(reverse=True, key=operator.itemgetter("ranking"))
         return order_ranking
 
     
