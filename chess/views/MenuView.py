@@ -27,8 +27,10 @@ class MenuView:
                     elif int(menu_choice_t) == 2:
                         tournament_id = int(input("\nEnter the tournament's ID: "))
                         #test if already started (round1 existing)
+                        test = RoundController.round1_existing(tournament_id)
+                        if test == 0:
+                            RoundController.generate_round(tournament_id)
                         
-                        RoundController.generate_round(tournament_id)
                         MatchController.show_match(tournament_id, 'Round1')
 
 

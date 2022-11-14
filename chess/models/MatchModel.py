@@ -33,9 +33,10 @@ class MatchModel:
     #update match table
     @staticmethod
     def update_table(result1, result2, tournament_id, round_name, player_1, player_2) -> None:
-        result = Query()
+        """result = Query()
         print(({'score_player_1': result1},{'score_player_2': result2}),((result.tournament_id == tournament_id)&(result.round_name == round_name)&(result.player_1 == player_1)&(result.player_2 == player_2)))
         match_table.update(({'score_player_1': result1},{'score_player_2': result2}),((result.tournament_id == tournament_id)&(result.round_name == round_name)&(result.player_1 == player_1)&(result.player_2 == player_2)))  
+        """
         pass
 
     @staticmethod

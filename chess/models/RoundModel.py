@@ -25,5 +25,19 @@ class RoundModel:
     def add_id():
         id_round = int(round_table.count(id)) + 1
         return id_round
+    
+    #existing round1
+    def existing_round1(tournament_id) -> None:
+        #
+        test = round_table.all()
+        print(test)
+        exist = 0
+        if test != []:
+            existing = Query()
+            test = round_table.search(existing.tournament_id == tournament_id)
+            if test != []:
+                exist = 1
+        print(exist)
+        return exist
 
     

@@ -15,3 +15,8 @@ class RoundController:
         match_list = MatchController.round1_match(tournament_id)
         new_round = RoundModel(round_id, name, begin_time , end_time, match_list, tournament_id)
         RoundModel.add_one(new_round)
+    
+    @staticmethod
+    def round1_existing(tournament_id) -> None:
+        test = RoundModel.existing_round1(tournament_id)
+        return test
