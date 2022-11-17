@@ -26,14 +26,26 @@ class MenuView:
                                             
                     elif int(menu_choice_t) == 2:
                         tournament_id = int(input("\nEnter the tournament's ID: "))
-                        #test if already started (round1 existing)
-                        test = RoundController.round1_existing(tournament_id)
-                        if test == 0:
-                            RoundController.generate_round(tournament_id)
-                        
+                        #test if  round already exist
+                        test = RoundController.round_existing(tournament_id, 'Round1')
+                        if test is False:
+                            RoundController.generate_round(tournament_id, 'Round1')
                         MatchController.show_match(tournament_id, 'Round1')
-
-
+                        menu_choice_m = int(input("\n\n------- Round1 Menu -----------\n 0 - Exit\n 1 - Start time\n 2 - End time\n 3 - Register the results\n Choice : "))
+                        if int(menu_choice_m) == 1:
+                            pass
+                        elif int(menu_choice_m) == 2:
+                            pass
+                        elif int(menu_choice_m) == 3:
+                            #register the results in db
+                            MatchController.reg_results(tournament_id, 'Round1')
+                            #create round2
+                            #test if  round already exist
+                            test = RoundController.round_existing(tournament_id, 'Round2')
+                            if test is False:
+                                RoundController.generate_round(tournament_id, 'Round2')
+                            MatchController.show_match(tournament_id, 'Round2')
+                            
                     elif int(menu_choice_t) == 3:
                         consult_choice = int(input("\nEnter the tournament's ID: "))
                         TournamentController.search_one(consult_choice)

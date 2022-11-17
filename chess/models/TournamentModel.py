@@ -15,7 +15,7 @@ class TournamentModel:
         description
         ):
         self.tournament_ids = tournament_ids
-        self.name = name
+        self.round_name = name
         self.date = date
         self.count_round = count_round
         self.location = location
@@ -37,7 +37,7 @@ class TournamentModel:
 
     #add a tournament
     def add_one(self) -> None:
-        new_tournament = {"tournament_ids": self.tournament_ids, "name": self.name, "date": self.date, "count_round": self.count_round, "location": self.location, "players_ids": self.players_ids, "round": self.round, "time_control": self.time_control, "description": self.description}
+        new_tournament = {"tournament_ids": self.tournament_ids, "name": self.round_name, "date": self.date, "count_round": self.count_round, "location": self.location, "players_ids": self.players_ids, "round": self.round, "time_control": self.time_control, "description": self.description}
         Data.insert(new_tournament)
 
     #Data set for a tournement
