@@ -1,5 +1,4 @@
-from models.TournamentModel import match_table, player_table
-from operator import itemgetter
+from models.TournamentModel import match_table
 from tinydb import Query
 
 class MatchModel:
@@ -14,7 +13,7 @@ class MatchModel:
         self.round_name = round_name
         self.player_1 = player_1
         self.player_2 = player_2
-        self.score_player_1 = score_player_1#voir arjancode énumération
+        self.score_player_1 = score_player_1
         self.score_player_2 = score_player_2
 
     #round1
@@ -27,7 +26,7 @@ class MatchModel:
         match_table.insert(new_match)
     
     #Show match for a round
-    def show_match(tournament_id, round_name) -> None:
+    def show_match(tournament_id, round_name) -> list:
         match = Query()
         result = match_table.search((match.tournament_id == tournament_id) & (match.round_name == round_name))
 

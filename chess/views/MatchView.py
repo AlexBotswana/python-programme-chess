@@ -8,11 +8,12 @@ class MatchView:
     #Show match for a round
     def show_match(tournament_id, round_name) -> None:
         results = MatchModel.show_match(tournament_id, round_name)
-        print('\n\n    Match for tournament ', tournament_id, round_name)
+        print('\n\n         Match for tournament', tournament_id, round_name)
 
         for p in results:
             print('')
-            print(f'        {p["player_1"]["lastname"]} - {p["player_1"]["ranking"]}  versus {p["player_2"]["lastname"]} - {p["player_2"]["ranking"]}')
+            print(f'            {p["player_1"]["lastname"]} - ({p["player_1"]["ranking"]})  versus {p["player_2"]["lastname"]} - ({p["player_2"]["ranking"]})')
+            print(f'Results:           {p["score_player_1"]}                  {p["score_player_2"]}')
         
     def reg_results(tournament_id, round_name) -> None:
         #search the matches for the corresponding round to register the results

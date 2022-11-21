@@ -19,19 +19,31 @@ class MenuView:
                 menu_choice_t = 1
                 #Menu selection
                 while int(menu_choice_t) != 0:
-                    menu_choice_t = int(input("\n\n---------------- Tournaments menu ----------------\n 0 - Exit\n 1 - Create a new tournament\n 2 - Start a tournament\n 3 - Continue a tournament\n 4 - Consult a tournament\n 5 - Generate report\n Choice : "))
+                    print('\n\n---------------- Tournaments menu ----------------\n')
+                    print('     0 - Exit')
+                    print('     1 - Create a new tournament')
+                    print('     2 - Start/update a tournament')
+                    print('     3 - Consult a tournament')
+                    print('     4 - Generate report')
+                    menu_choice_t = int(input('     Choice : '))
                     
                     if int(menu_choice_t) == 1:
-                        MenuView.add_tournament()
-                                            
+                        MenuView.add_tournament()                                           
                     elif int(menu_choice_t) == 2:
+                        #generate round
                         tournament_id = int(input("\nEnter the tournament's ID: "))
                         #test if  round already exist
                         test = RoundController.round_existing(tournament_id, 'Round1')
                         if test is False:
                             RoundController.generate_round(tournament_id, 'Round1')
                         MatchController.show_match(tournament_id, 'Round1')
-                        menu_choice_m = int(input("\n\n------- Round1 Menu -----------\n 0 - Exit\n 1 - Start time\n 2 - End time\n 3 - Register the results\n Choice : "))
+                        print('\n\n---------- Round1 Menu -----------\n')
+                        print('     0 - Exit')
+                        print('     1 - Start time')
+                        print('     2 - End time')
+                        print('     3 - Register the results')
+                        menu_choice_m = int(input(' Choice : '))
+                        
                         if int(menu_choice_m) == 1:
                             pass
                         elif int(menu_choice_m) == 2:
@@ -45,7 +57,19 @@ class MenuView:
                             if test is False:
                                 RoundController.generate_round(tournament_id, 'Round2')
                             MatchController.show_match(tournament_id, 'Round2')
-                            
+                            print('\n\n---------- Round2 Menu -----------\n')
+                            print('     0 - Exit')
+                            print('     1 - Start time')
+                            print('     2 - End time')
+                            print('     3 - Register the results')
+                            menu_choice_m = int(input(' Choice : '))
+                            if int(menu_choice_m) == 1:
+                                pass
+                            elif int(menu_choice_m) == 2:
+                                pass
+                            elif int(menu_choice_m) == 3:
+                                #register the results in db
+                                MatchController.reg_results(tournament_id, 'Round2')
                     elif int(menu_choice_t) == 3:
                         consult_choice = int(input("\nEnter the tournament's ID: "))
                         TournamentController.search_one(consult_choice)

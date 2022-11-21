@@ -29,12 +29,10 @@ class RoundModel:
     #existing round1
     def round_existing(tournament_id:int, round_name:str) -> bool:
         test = round_table.all()
-        print(test)
         exist = False
         if test != []:
             existing = Query()
-            test = round_table.get((existing.tournament_id == tournament_id)&(existing.round_name == round_name))
-            print(test)
+            test = round_table.get((existing.tournament_id == tournament_id) & (existing.round_name == round_name))
             if test != None:
                 exist = True
         return exist
