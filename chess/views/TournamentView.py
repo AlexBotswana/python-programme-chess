@@ -15,7 +15,7 @@ class TournamentView:
             print(f'round                       {p["round"]}')
             print(f'time_control                {p["time_control"]}')
             print(f'description                 {p["description"]}')
-            
+
     @staticmethod
     def show_tournament(tournament_info) -> None:
         for p in tournament_info:

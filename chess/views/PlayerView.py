@@ -13,7 +13,6 @@ class PlayerView:
             print(f'Birthdate       {p["birthdate"]}')
             print(f'Gender          {p["gender"]}')
             print(f'Ranking         {p["ranking"]}')
-            
 
     @staticmethod
     def show_players(players_info) -> None:
