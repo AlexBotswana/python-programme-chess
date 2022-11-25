@@ -1,5 +1,6 @@
 # python-programme-chess
-projet4 openclassroom
+projet4 openclassroom: application to manage a chess tournament (swiss model)
+using MVC model (Models-Views-Controllers) for development and TinyDb as database
 
 Installation
     Copy/paste the repository chess (with all its content)
