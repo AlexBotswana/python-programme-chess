@@ -12,7 +12,6 @@ class MatchController:
     def round1_match(tournament_id) -> list:
         # players list order by reverse ranking
         list_players = PlayerModel.sort_ranking()
-
         # match depending of ranking and numbers of players
         # (1st player against the 1st player of the 2nd half part of the list)
         nb_players = len(list_players)
@@ -50,7 +49,7 @@ class MatchController:
         # players list order by reverse ranking
         list_players = PlayerModel.sort_ranking()
         # match depending of ranking: 1st versus 2nd, 3rd versus 4th, etc...
-        nb_players = len(list_players)
+        nb_players = len(list_players) - 1
         # match creation
         count = 0
         match_list = []
@@ -59,16 +58,23 @@ class MatchController:
             player2 = list_players[count + 1]
             # test if match already played for this tournament
             # if yes, try next ranking
-            match_played = MatchModel.test_played(player1, player2)
+            match_played = MatchModel.test_played(player1,
+                                                  player2,
+                                                  tournament_id
+                                                  )
             while match_played is True:
                 count = count + 1
                 player2 = list_players[count]
-                match_played = MatchModel.test_played(player1, player2)
+                match_played = MatchModel.test_played(player1,
+                                                      player2,
+                                                      tournament_id
+                                                      )
             match_round = MatchModel(tournament_id,
                                      round_name,
                                      player1,
                                      player2,
-                                     0, 0
+                                     0,
+                                     0
                                      )
             MatchModel.add_match(match_round)
             match = (player1, player2)

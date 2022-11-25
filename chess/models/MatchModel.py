@@ -56,12 +56,21 @@ class MatchModel:
                            )
 
     @staticmethod
-    def test_played(player1: list, player2: list) -> bool:
+    def test_played(player1: list, player2: list, tournament_id: int) -> bool:
         match = Query()
         result = match_table.get((match.player_1 == player1)
                                  & (match.player_2 == player2)
+                                 & (match.tournament_id == tournament_id)
                                  )
         exist = False
         if result is not None:
             exist = True
+        else:
+            # test match if player2 was player1
+            result = match_table.get((match.player_1 == player2)
+                                     & (match.player_2 == player1)
+                                     & (match.tournament_id == tournament_id)
+                                     )
+            if result is not None:
+                exist = True
         return exist

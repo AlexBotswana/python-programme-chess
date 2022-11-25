@@ -131,19 +131,19 @@ class MenuView:
         birthdate = input("Birthdate (dd/mm/yyyy):  ")
         gender = input("Gender (M or F) :  ")
         ranking = int(input("Ranking :  "))
-        tournament_ids = 0
+        tournament_id = int(input("Tournament ID : "))
         new_player = PlayerModel(id,
                                  firstname,
                                  lastname,
                                  birthdate,
                                  gender,
                                  ranking,
-                                 tournament_ids
+                                 tournament_id
                                  )
         PlayerController.add_one(new_player)
 
     def add_tournament() -> None:
-        tournament_ids = int(input("IDS: "))
+        tournament_id = int(input("ID: "))
         name = input("Tournament Name: ")
         date = input("Tournament date (dd/mm/yyyy): ")
         number_round = input("Number of round: ")
@@ -152,7 +152,7 @@ class MenuView:
         player_ids = input("Enter players' ID (with ; as separator): ")
         time_control = input("Time control (Bullets, Blitz or Rapid): ")
         description = input("Enter a tournament description: ")
-        new_tournament = TournamentModel(tournament_ids,
+        new_tournament = TournamentModel(tournament_id,
                                          name,
                                          date,
                                          number_round,

@@ -73,7 +73,7 @@ class TournamentModel:
                  "players_ids": '1;2;3;4',
                  "time_control": 'rapid',
                  "description": 'Tournoi suisse'
-                 },
+                 }
                             ]
         Data.insert_multiple(init_tournament)
 
@@ -110,6 +110,38 @@ class TournamentModel:
                  "ranking": 1350,
                  "tournament_ids": 1
                  },
+                {"id": 5,
+                 "firstname": "Caroline",
+                 "lastname": "ONE",
+                 "birthdate": "01/12/1970",
+                 "gender": "M",
+                 "ranking": 1303,
+                 "tournament_ids": 1
+                 },
+                {"id": 6,
+                 "firstname": "Xavier",
+                 "lastname": "TWO",
+                 "birthdate": "02/11/1975",
+                 "gender": "F",
+                 "ranking": 1252,
+                 "tournament_ids": 1
+                 },
+                {"id": 7,
+                 "firstname": "Victor",
+                 "lastname": "THREE",
+                 "birthdate": "03/10/1980",
+                 "gender": "M",
+                 "ranking": 1201,
+                 "tournament_ids": 1
+                 },
+                {"id": 8,
+                 "firstname": "Gaspart",
+                 "lastname": "FOUR",
+                 "birthdate": "04/09/1985",
+                 "gender": "F",
+                 "ranking": 1150,
+                 "tournament_ids": 1
+                 }
                        ]
         player_table.insert_multiple(init_player)
 
