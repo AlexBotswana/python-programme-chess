@@ -31,7 +31,7 @@ class RoundModel:
         id_round = int(round_table.count(id)) + 1
         return id_round
 
-    # existing round1
+    # existing round1 (permet la sauvegarde du round)
     def round_exist(tournament_id: int, round_name: str) -> bool:
         test = round_table.all()
         exist = False

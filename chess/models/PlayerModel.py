@@ -10,7 +10,7 @@ class PlayerModel:
                  birthdate,
                  gender,
                  ranking,
-                 tournament_ids
+                 tournament_id
                  ):
         self.id = id
         self.firstname = firstname
@@ -18,26 +18,21 @@ class PlayerModel:
         self.birthdate = birthdate
         self.gender = gender
         self.ranking = ranking
-        self.tournament_ids = tournament_ids
+        self.tournament_id = tournament_id
 
     def add_one(self) -> None:
         new_player = {"id": self.id, "firstname": self.firstname,
                       "lastname": self.lastname, "birthdate": self.birthdate,
                       "gender": self.gender, "ranking": self.ranking,
-                      "tournament_ids": self.tournament_ids
+                      "tournament_id": self.tournament_id
                       }
         player_table.insert(new_player)
 
     @staticmethod
-    def get_one(player_lastname: str) -> None:
+    def get_one(player_id: int) -> None:
         oneplayer = Query()
-        result_one = player_table.search(oneplayer.lastname == player_lastname)
+        result_one = player_table.search(oneplayer.id == player_id)
         return result_one
-
-    @staticmethod
-    def get_all() -> None:
-        result_all = player_table.all()
-        return result_all
 
     @staticmethod
     def add_id() -> None:
@@ -51,3 +46,12 @@ class PlayerModel:
         order_ranking = player_table.all()
         order_ranking.sort(reverse=True, key=operator.itemgetter("ranking"))
         return order_ranking
+
+    # update ranking in player table
+    @staticmethod
+    def update_ranking(player_id: int, ranking: int) -> None:
+        result = Query()
+        player_table.update(
+                        {'ranking': ranking},
+                        (result.id == player_id)
+                            )

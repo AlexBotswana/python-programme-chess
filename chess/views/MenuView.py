@@ -1,6 +1,4 @@
 from controllers.TournamentController import TournamentController
-from models.PlayerModel import PlayerModel
-from models.TournamentModel import TournamentModel
 from controllers.PlayerController import PlayerController
 from controllers.RoundController import RoundController
 from controllers.MatchController import MatchController
@@ -28,12 +26,12 @@ class MenuView:
                     print('     0 - Exit')
                     print('     1 - Create a new tournament')
                     print('     2 - Start/update a tournament')
-                    print('     3 - Consult a tournament')
-                    print('     4 - Generate report')
+                    print('     3 - Search a tournament')
+                    print('     4 - Search all tournament')
                     menu_choice_t = int(input('     Choice : '))
 
                     if int(menu_choice_t) == 1:
-                        MenuView.add_tournament()
+                        TournamentController.add_tournament()
                     elif int(menu_choice_t) == 2:
                         # generate round
                         tournament_id = int(input("\nEnter tournament's ID: "))
@@ -56,8 +54,10 @@ class MenuView:
                         menu_choice_m = int(input(' Choice : '))
 
                         if int(menu_choice_m) == 1:
+                            # on going
                             pass
                         elif int(menu_choice_m) == 2:
+                            # on going
                             pass
                         elif int(menu_choice_m) == 3:
                             # register the results in db
@@ -83,8 +83,10 @@ class MenuView:
                             print('     3 - Register the results')
                             menu_choice_m = int(input(' Choice : '))
                             if int(menu_choice_m) == 1:
+                                # on going
                                 pass
                             elif int(menu_choice_m) == 2:
+                                # on going
                                 pass
                             elif int(menu_choice_m) == 3:
                                 # register the results in db
@@ -96,10 +98,6 @@ class MenuView:
                         TournamentController.search_one(consult_choice)
 
                     elif int(menu_choice_t) == 4:
-                        consult_choice = int(input("\nEnter tournament ID: "))
-                        TournamentController.search_one(consult_choice)
-
-                    elif int(menu_choice_t) == 5:
                         TournamentController.show_all()
 
             elif int(menu_choice) == 2:
@@ -108,58 +106,27 @@ class MenuView:
                     # Menu selection
                     print('\n\n---------------- Players menu ----------------')
                     print(' 0 - Exit')
-                    print(' 1 - Search a player')
+                    print(' 1 - Search a player with id')
                     print(' 2 - Search all players')
                     print(' 3 - Add new player')
+                    print(' 4 - Update player ranking')
                     menu_choice_p = int(input(" Choice : "))
 
                     if int(menu_choice_p) == 1:
-                        name_choice_p = input("Enter player lastname: ")
+                        id_choice_p = int(input("Enter player id: "))
                         # search a player
-                        PlayerController.search_one(name_choice_p)
+                        PlayerController.search_one(id_choice_p)
 
                     elif int(menu_choice_p) == 2:
                         PlayerController.show_all()
 
                     elif int(menu_choice_p) == 3:
-                        MenuView.add_player()
+                        PlayerController.add_player()
+                    
+                    elif int(menu_choice_p) == 4:
+                        id_choice_p = int(input("Enter player id: "))
+                        # show player before update
+                        PlayerController.update_ranking(id_choice_p)
 
-    def add_player() -> None:
-        id = PlayerController.add_id_player()
-        firstname = input("Firstname :  ")
-        lastname = input("Lastname :  ")
-        birthdate = input("Birthdate (dd/mm/yyyy):  ")
-        gender = input("Gender (M or F) :  ")
-        ranking = int(input("Ranking :  "))
-        tournament_id = int(input("Tournament ID : "))
-        new_player = PlayerModel(id,
-                                 firstname,
-                                 lastname,
-                                 birthdate,
-                                 gender,
-                                 ranking,
-                                 tournament_id
-                                 )
-        PlayerController.add_one(new_player)
+                    
 
-    def add_tournament() -> None:
-        tournament_id = int(input("ID: "))
-        name = input("Tournament Name: ")
-        date = input("Tournament date (dd/mm/yyyy): ")
-        number_round = input("Number of round: ")
-        location = input("Location: ")
-        round = 0
-        player_ids = input("Enter players' ID (with ; as separator): ")
-        time_control = input("Time control (Bullets, Blitz or Rapid): ")
-        description = input("Enter a tournament description: ")
-        new_tournament = TournamentModel(tournament_id,
-                                         name,
-                                         date,
-                                         number_round,
-                                         location,
-                                         round,
-                                         player_ids,
-                                         time_control,
-                                         description
-                                         )
-        TournamentController.add_one(new_tournament)

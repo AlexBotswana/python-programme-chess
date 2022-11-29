@@ -4,31 +4,29 @@ from tinydb import Query
 
 class TournamentModel:
     def __init__(self,
-                 tournament_ids,
+                 tournament_id,
                  name,
                  date,
                  location,
                  count_round,
                  players_ids,
-                 round,
                  # For time_control: bullet : 180s; blitz : 300s; rapid : 600s
                  time_control,
                  description
                  ):
-        self.tournament_ids = tournament_ids
+        self.tournament_id = tournament_id
         self.round_name = name
         self.date = date
-        self.count_round = count_round
         self.location = location
+        self.count_round = count_round
         self.players_ids = players_ids
-        self.round = round
         self.time_control = time_control
         self.description = description
 
     @staticmethod
     def get_one(id: int) -> None:
         one_tournament = Query()
-        result_one = Data.search(one_tournament.tournament_ids == id)
+        result_one = Data.search(one_tournament.tournament_id == id)
         return result_one
 
     @staticmethod
@@ -36,15 +34,19 @@ class TournamentModel:
         result_all = Data.all()
         return result_all
 
+    @staticmethod
+    def add_id() -> None:
+        id_tournament = int(Data.count(id)) + 1
+        return id_tournament
+
     # add a tournament
     def add_one(self) -> None:
-        new_tournament = {"tournament_ids": self.tournament_ids,
+        new_tournament = {"tournament_id": self.tournament_id,
                           "name": self.round_name,
                           "date": self.date,
-                          "count_round": self.count_round,
                           "location": self.location,
+                          "count_round": self.count_round,
                           "players_ids": self.players_ids,
-                          "round": self.round,
                           "time_control": self.time_control,
                           "description": self.description
                           }
@@ -54,26 +56,15 @@ class TournamentModel:
     @staticmethod
     def init_db() -> None:
         init_tournament = [
-                {"tournament_ids": 1,
+                {"tournament_id": 1,
                  "name": "Tournois du Botswana",
                  "date": "13/10/2022",
-                 "count_round": 3,
                  "location": "Gaborone",
-                 "round": 1,
-                 "players_ids": '1;2;3;4',
-                 "time_control": 'bullets',
+                 "count_round": 2,
+                 "players_ids": '1;2;3;4;5;6;7;8',
+                 "time_control": 'Bullets',
                  "description": 'Tournoi suisse pour les eleves de Westwood IS'
                  },
-                {"tournament_ids": 2,
-                 "name": "Tournois de Toulouse",
-                 "date": "14/10/2022",
-                 "count_round": 3,
-                 "location": "Toulouse",
-                 "round": 1,
-                 "players_ids": '1;2;3;4',
-                 "time_control": 'rapid',
-                 "description": 'Tournoi suisse'
-                 }
                             ]
         Data.insert_multiple(init_tournament)
 
@@ -84,7 +75,7 @@ class TournamentModel:
                  "birthdate": "01/12/1970",
                  "gender": "M",
                  "ranking": 1300,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
                 {"id": 2,
                  "firstname": "Xavier",
@@ -92,7 +83,7 @@ class TournamentModel:
                  "birthdate": "02/11/1975",
                  "gender": "F",
                  "ranking": 1250,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
                 {"id": 3,
                  "firstname": "Victor",
@@ -100,7 +91,7 @@ class TournamentModel:
                  "birthdate": "03/10/1980",
                  "gender": "M",
                  "ranking": 1200,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
                 {"id": 4,
                  "firstname": "Gaspart",
@@ -108,7 +99,7 @@ class TournamentModel:
                  "birthdate": "04/09/1985",
                  "gender": "F",
                  "ranking": 1350,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
                 {"id": 5,
                  "firstname": "Caroline",
@@ -116,7 +107,7 @@ class TournamentModel:
                  "birthdate": "01/12/1970",
                  "gender": "M",
                  "ranking": 1303,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
                 {"id": 6,
                  "firstname": "Xavier",
@@ -124,7 +115,7 @@ class TournamentModel:
                  "birthdate": "02/11/1975",
                  "gender": "F",
                  "ranking": 1252,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
                 {"id": 7,
                  "firstname": "Victor",
@@ -132,17 +123,9 @@ class TournamentModel:
                  "birthdate": "03/10/1980",
                  "gender": "M",
                  "ranking": 1201,
-                 "tournament_ids": 1
+                 "tournament_id": 1
                  },
-                {"id": 8,
-                 "firstname": "Gaspart",
-                 "lastname": "FOUR",
-                 "birthdate": "04/09/1985",
-                 "gender": "F",
-                 "ranking": 1150,
-                 "tournament_ids": 1
-                 }
-                       ]
+                        ]
         player_table.insert_multiple(init_player)
 
 
