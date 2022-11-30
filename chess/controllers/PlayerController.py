@@ -49,7 +49,6 @@ class PlayerController:
     def update_ranking(player_id: int) -> None:
         PlayerController.search_one(player_id)
         new_ranking = int(input('\n\nEnter new ranking : '))
-        PlayerModel.update_ranking(player_id,new_ranking)
+        PlayerModel.update_ranking(player_id, new_ranking)
         print('\n\n')
         PlayerController.search_one(player_id)
-

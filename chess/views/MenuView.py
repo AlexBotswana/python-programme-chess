@@ -122,11 +122,8 @@ class MenuView:
 
                     elif int(menu_choice_p) == 3:
                         PlayerController.add_player()
-                    
+
                     elif int(menu_choice_p) == 4:
                         id_choice_p = int(input("Enter player id: "))
                         # show player before update
                         PlayerController.update_ranking(id_choice_p)
-
-                    
-

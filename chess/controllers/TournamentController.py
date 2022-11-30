@@ -28,7 +28,7 @@ class TournamentController:
         location = input("Location: ")
         number_round = input("Number of round: ")
         player_ids = input("Enter players' ID (with ; as separator): ")
-        time_control = input("Time control (1 - Bullets, 2 - Blitz, 3 - Rapid): ")
+        time_control = input("Time control (1- Bullets, 2- Blitz, 3- Rapid): ")
         if time_control == '1':
             time_control = 'Bullets'
         elif time_control == '2':
