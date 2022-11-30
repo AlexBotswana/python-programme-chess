@@ -15,4 +15,3 @@ while out != 1:
         out = 1
     except Exception:
         print('WRONG CHOICE')
-
